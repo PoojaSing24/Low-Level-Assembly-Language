@@ -1,0 +1,31 @@
+
+;int main(int argc ,char** argv )
+
+section .data
+	msg db"no of arguments are %d",10,0
+	;msg1 db "argv=%s",10,0
+	msg1 db"addition of argc is : %d",10,0
+
+section .text
+	global main
+	extern printf
+main:
+	enter 0 ,0
+	mov eax ,dword[ebp+8]  ;char argv[] : *argv[] :**argv
+	mov edx ,dword[ebp+12]
+	mov ecx ,dword[edx+4]
+	
+	pusha
+	push eax 
+	push msg
+	call printf
+	add esp,8
+	popa
+
+	pusha
+	push ecx
+	push msg1
+	call printf
+	add esp,8
+	popa
+	leave
